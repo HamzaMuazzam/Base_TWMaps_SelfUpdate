@@ -43,12 +43,13 @@
         android:text="@string/update_application"
         android:textAllCaps="true"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView" />
+        style="@style/ButtonEnabled"
+        app:layout_constraintBottom_toTopOf="@+id/tvTextBottom"
+        app:layout_constraintEnd_toEndOf="@+id/tvTextBottom"
+        app:layout_constraintStart_toStartOf="@+id/tvTextBottom" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvTextBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

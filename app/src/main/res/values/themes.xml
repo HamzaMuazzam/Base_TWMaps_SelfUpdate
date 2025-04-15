@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.TWMaps" parent="Base.Theme.TWMaps" />
+    <!-- res/values/styles.xml -->
+    <style name="ButtonEnabled" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_enabled_bg</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="ButtonDisabled" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_disabled_bg</item>
+        <item name="android:textColor">#B0B0B0</item> <!-- Light gray text -->
+    </style>
+
 </resources>
