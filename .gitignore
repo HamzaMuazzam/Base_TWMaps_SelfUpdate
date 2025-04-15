@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/release/baselineProfiles/
+/app/release/app-arm64-v8a-release.apk
+/app/release/output-metadata.json
+/app/release/

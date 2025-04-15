@@ -30,7 +30,8 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity() {
 
     private val baseName = "TWMaps-base-release"
-    private val downloadUrl = "https://selected-capital-treefrog.ngrok-free.app/apk/${baseName}.zip"
+    private val downloadUrl = "http://10.10.10.33:8088/apk/${baseName}.zip"
+//    private val downloadUrl = "https://selected-capital-treefrog.ngrok-free.app/apk/${baseName}.zip"
     private lateinit var downloadFile: File
     private val client = OkHttpClient()
     private val activityLauncher: ActivityLauncher = ActivityLauncher(this)
@@ -65,7 +66,17 @@ class MainActivity : AppCompatActivity() {
                 binding.buttonDownload.setTextColor(Color.WHITE)
                 binding.tvTextBottom.text =getString(R.string.please_download_twmaps_latest_application_version)
                 binding.tvTextBottom.setTextColor(getColor(R.color.black))
+                showResumeButton()
             })
+
+        showResumeButton()
+    }
+
+    private  fun showResumeButton(){
+        val tempFile = File(downloadFile.absolutePath + ".part")
+        if(tempFile.exists()){
+            binding.buttonDownload.text = "Resume Downloading"
+        }
     }
 
     private fun downloadWithResume(url: String) {
@@ -121,18 +132,10 @@ class MainActivity : AppCompatActivity() {
                     input.close()
 
                     if (tempFile.renameTo(downloadFile)) {
-                        runOnUiThread {
-                            Toast.makeText(
-                                this@MainActivity,
-                                "Download complete",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-
                         val outputDir = File(downloadFile.parentFile, baseName)
                         if (!outputDir.exists()) outputDir.mkdirs()
-
                         unzipFile(downloadFile, outputDir)
+
                     } else {
                         runOnUiThread {
                             showHideButtonText(false)
@@ -164,7 +167,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun unzipFile(zipFile: File, targetDirectory: File) {
+
         thread {
+            runOnUiThread {
+                binding.progressBar.visibility = ProgressBar.VISIBLE
+                binding.buttonDownload.visibility = ProgressBar.GONE
+                binding.tvTextBottom.text = "Unzipping..."
+            }
             try {
                 ZipInputStream(zipFile.inputStream().buffered()).use { zipInputStream ->
                     var entry: ZipEntry? = zipInputStream.nextEntry
@@ -187,7 +196,6 @@ class MainActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     zipFile.delete()
-                    Toast.makeText(this, "Unzip complete", Toast.LENGTH_SHORT).show()
                     showHideButtonText(false)
                     installApkFromInternalStorage()
 
@@ -202,7 +210,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun installApkFromInternalStorage() {
         try {
