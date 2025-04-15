@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TWMaps</string>
+    <string name="none">none</string>
+    <string name="download_apk">Download Apk</string>
+    <string name="update_application">Update Application</string>
+    <string name="please_download_twmaps_latest_application_version">Please download TWMaps latest application version</string>
+    <string name="downloading_in_progress">Downloading in progress</string>
+</resources>
