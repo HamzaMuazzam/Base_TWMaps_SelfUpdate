@@ -23,6 +23,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
@@ -37,16 +38,17 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
-    splits{
-        abi {
-            isEnable = true
-            reset()
-            include("arm64-v8a")
-            isUniversalApk = false
-        }
-    }
+//    splits{
+//        abi {
+//            isEnable = true
+//            reset()
+//            include("arm64-v8a")
+//            isUniversalApk = false
+//        }
+//    }
 }
 
 dependencies {

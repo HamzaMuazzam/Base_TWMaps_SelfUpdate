@@ -30,8 +30,10 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity() {
 
     private val baseName = "TWMaps-base-release"
-    private val downloadUrl = "http://10.10.10.33:8088/apk/${baseName}.zip"
-//    private val downloadUrl = "https://selected-capital-treefrog.ngrok-free.app/apk/${baseName}.zip"
+    private val downloadUrl = if (BuildConfig.DEBUG) "http://10.10.10.33:8088/apk/${baseName}.zip"
+    else "http://121.91.56.50:8088/apk/${baseName}.zip"
+
+    //    private val downloadUrl = "https://selected-capital-treefrog.ngrok-free.app/apk/${baseName}.zip"
     private lateinit var downloadFile: File
     private val client = OkHttpClient()
     private val activityLauncher: ActivityLauncher = ActivityLauncher(this)
@@ -64,7 +66,8 @@ class MainActivity : AppCompatActivity() {
                 binding.buttonDownload.isEnabled = true
                 binding.buttonDownload.setBackgroundResource(R.drawable.button_enabled_bg)
                 binding.buttonDownload.setTextColor(Color.WHITE)
-                binding.tvTextBottom.text =getString(R.string.please_download_twmaps_latest_application_version)
+                binding.tvTextBottom.text =
+                    getString(R.string.please_download_twmaps_latest_application_version)
                 binding.tvTextBottom.setTextColor(getColor(R.color.black))
                 showResumeButton()
             })
@@ -72,9 +75,9 @@ class MainActivity : AppCompatActivity() {
         showResumeButton()
     }
 
-    private  fun showResumeButton(){
+    private fun showResumeButton() {
         val tempFile = File(downloadFile.absolutePath + ".part")
-        if(tempFile.exists()){
+        if (tempFile.exists()) {
             binding.buttonDownload.text = "Resume Downloading"
         }
     }
@@ -280,7 +283,7 @@ class MainActivity : AppCompatActivity() {
                 binding.tvTextBottom.text = "Downloading..."
                 binding.progressBar.visibility = View.VISIBLE
                 binding.buttonDownload.visibility = View.GONE
-            },500)
+            }, 500)
         } else {
             binding.progressBar.visibility = View.GONE
             binding.tvTextBottom.text =
