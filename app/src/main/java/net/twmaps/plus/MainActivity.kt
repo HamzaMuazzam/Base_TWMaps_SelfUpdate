@@ -30,8 +30,9 @@ import kotlin.concurrent.thread
 class MainActivity : AppCompatActivity() {
 
     private val baseName = "TWMaps-base-release"
-    private val downloadUrl = if (BuildConfig.DEBUG) "http://10.10.10.33:8088/apk/${baseName}.zip"
-    else "http://121.91.56.50:8088/apk/${baseName}.zip"
+//    private val downloadUrl = if (BuildConfig.DEBUG) "http://10.10.10.33:8088/apk/${baseName}.zip"
+//    else "http://nav.twautomotives.com:8088/apk/${baseName}.zip"
+    private val downloadUrl = "http://nav.twautomotives.com:8088/apk/${baseName}.zip"
 
     //    private val downloadUrl = "https://selected-capital-treefrog.ngrok-free.app/apk/${baseName}.zip"
     private lateinit var downloadFile: File
